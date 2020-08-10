@@ -36,7 +36,15 @@ class _VideoGameDataState extends State<VideoGameData> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton.extended(
+      appBar: AppBar(
+        centerTitle: true,
+        title: Text(
+          "//---Videogames---//",
+          style: TextStyle(fontSize: 26.0, fontStyle: FontStyle.italic),
+        ),
+        backgroundColor: Colors.deepPurpleAccent,
+      ),
+      /* floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
           sleep(Duration(seconds: 5));
         },
@@ -50,15 +58,32 @@ class _VideoGameDataState extends State<VideoGameData> {
         ),
         backgroundColor: Colors.black45,
         foregroundColor: Colors.amber,
-      ),
-      appBar: AppBar(
-        centerTitle: true,
-        title: Text(
-          "//---Videogames---//",
-          style: TextStyle(fontSize: 26.0, fontStyle: FontStyle.italic),
+      ), */
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.indigoAccent,
+        onPressed: null,
+        child: Text(
+          '¿?',
+          style: TextStyle(fontSize: 20.0),
         ),
-        backgroundColor: Colors.deepPurpleAccent,
       ),
+      bottomNavigationBar:
+          new BottomNavigationBar(fixedColor: Colors.deepPurpleAccent, items: [
+        new BottomNavigationBarItem(
+          icon: new Icon(Icons.home),
+          title: new Text("Home"),
+        ),
+        new BottomNavigationBarItem(
+          icon: new Icon(Icons.comment),
+          title: new Text("Notes"),
+        )
+      ]),
+      /* persistentFooterButtons: <Widget>[
+        new Icon(Icons.visibility),
+        new Text('Big Brother is Watching'),
+        new Icon(Icons.visibility),
+      ], */
+      drawer: _drawerTest(),
       body: ListView.builder(
         itemCount: data == null ? 0 : data.length,
         itemBuilder: (BuildContext context, int index) {
@@ -112,6 +137,25 @@ class _VideoGameDataState extends State<VideoGameData> {
   void initState() {
     super.initState();
     this.getVGData();
+  }
+
+  Widget _drawerTest() {
+    return Drawer(
+      child: ListView(
+        children: <Widget>[
+          new DrawerHeader(
+            child: Icon(
+              Icons.gamepad,
+              size: 90,
+              color: Colors.white,
+            ),
+            decoration: BoxDecoration(color: Colors.deepPurpleAccent),
+          ),
+          Text('About'),
+          Text('Settings')
+        ],
+      ),
+    );
   }
 
   Widget _cardImagen(String cover, String title) {
